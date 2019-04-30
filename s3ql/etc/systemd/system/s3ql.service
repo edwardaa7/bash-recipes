@@ -1,0 +1,17 @@
+[Unit]
+SourcePath=/etc/init.d/s3ql
+Description=LSB: s3ql script
+Before=bitnami.service runlevel2.target runlevel3.target runlevel4.target runlevel5.target shutdown.target
+After=network-online.target remote-fs.target
+Wants=network-online.target
+Conflicts=shutdown.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/init.d/s3ql start
+ExecStop=/etc/init.d/s3ql stop
+
+[Install]
+WantedBy=multi-user.target
+
